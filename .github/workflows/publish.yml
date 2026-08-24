@@ -1,0 +1,27 @@
+name: publish
+on:
+  workflow_run:
+    workflows: [generate]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  publish:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -e .
+      - name: Publish only through safety gate
+        env:
+          PUBLISHING_MODE: ${{ secrets.PUBLISHING_MODE }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python -m revibe_bot.cli publish

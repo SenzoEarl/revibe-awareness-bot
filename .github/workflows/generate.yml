@@ -1,0 +1,18 @@
+name: generate
+on:
+  workflow_run:
+    workflows: [analyze]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  generate:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -e .
+      - run: python -m revibe_bot.cli generate
