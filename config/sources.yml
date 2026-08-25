@@ -1,0 +1,32 @@
+sources:
+  trustpilot:
+    enabled: false
+    mode: api_only
+    official_api_required: true
+    respect_robots: true
+    min_interval_seconds: 3
+    notes: "Enable only after an authorized API/access arrangement is configured."
+
+  hellopeter:
+    enabled: false
+    mode: compliant_public_access
+    official_api_required: false
+    respect_robots: true
+    min_interval_seconds: 5
+    notes: "Do not enable a collector unless current site terms and technical access permit collection."
+
+  reddit:
+    enabled: false
+    mode: api_only
+    official_api_required: true
+    respect_robots: true
+    min_interval_seconds: 2
+    notes: "Use Reddit's authorized API/client access; do not scrape private or restricted content."
+
+  google_reviews:
+    enabled: false
+    mode: api_only
+    official_api_required: true
+    respect_robots: true
+    min_interval_seconds: 3
+    notes: "Use an authorized Google API/product where the required review data is legally available."
