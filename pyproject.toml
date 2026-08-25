@@ -1,6 +1,6 @@
 [project]
 name = "revibe-awareness-bot"
-version = "0.2.0"
+version = "0.2.1"
 description = "Evidence-first consumer information monitoring and responsible social-media publishing platform"
 requires-python = ">=3.12"
 license = {text = "Apache-2.0"}
@@ -12,6 +12,7 @@ dependencies = [
   "httpx>=0.28,<1",
   "tenacity>=9,<10",
   "rapidfuzz>=3.10,<4",
+  "PyYAML>=6.0,<7",
 ]
 
 [project.optional-dependencies]
